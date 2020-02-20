@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   runner:
-    image: smitt04/github-runner
+    image: smitt04/github-runner:latest-buster
     environment:
       RUNNER_NAME: "my-runner"
       RUNNER_REPOSITORY_URL: ${RUNNER_REPOSITORY_URL}

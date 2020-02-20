@@ -31,7 +31,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     sudo \
     supervisor
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN chmod 644 /etc/supervisor/conf.d/supervisord.conf
 
 # Install Docker CLI
@@ -57,7 +57,7 @@ RUN curl -L -O https://github.com/actions/runner/releases/download/v${GH_RUNNER_
     && ./bin/installdependencies.sh \
     && chown -R runner: /home/runner
 
-COPY entrypoint.sh /entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
