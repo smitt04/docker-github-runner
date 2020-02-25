@@ -44,11 +44,6 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-c
 RUN rm -rf /var/lib/apt/lists/* && \
     apt-get clean
 
-RUN useradd -ms /bin/bash runner && \
-    usermod -aG docker runner && \
-    usermod -aG sudo runner && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
 WORKDIR /home/runner
 
 RUN curl -L -O https://github.com/actions/runner/releases/download/v${GH_RUNNER_VERSION}/actions-runner-linux-x64-${GH_RUNNER_VERSION}.tar.gz \
@@ -61,5 +56,3 @@ COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-
-USER runner
